@@ -21,7 +21,7 @@ export const Header: React.FC<Props> = ({ className }) => {
         <div className='flex items-center gap-4'>
           <Image src='/logo.png' alt='Logo' width={35} height={35}/>
           <div>
-            <h1 className='text-2xl uppercase font-black'>Next Pizza</h1>
+            <h1 className='text-2xl uppercase font-black'>DUDU Pizza</h1>
             <p className='text-sm text-gray-400 leading-3'>вкуснее уже некуда</p>
           </div>
         </div>
