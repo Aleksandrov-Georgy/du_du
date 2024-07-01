@@ -1,7 +1,5 @@
 'use client';
 
-
-
 import { cn } from '@/lib/utils';
 import { API } from '@/services/api-client';
 import { Product } from '@prisma/client';
@@ -20,7 +18,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const [products, setProducts] = React.useState<Product[]>([]);
   const ref = React.useRef(null);
 
-  useClickAway(ref, () => {
+   useClickAway(ref, () => {
     setFocused(false);
   });
 
