@@ -19,4 +19,4 @@ export default async function ProductModalPage({ params: { id } }: { params: { i
   }
 
   return <ChooseProductModal product={product} />;
-}
+};
