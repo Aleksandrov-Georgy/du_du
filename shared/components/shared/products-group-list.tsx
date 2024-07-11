@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useIntersection } from "react-use";
-import { Title } from "./title";
-import { cn } from "@/shared/lib/utils";
-import { ProductCard } from "./product-card";
-import { useCategoryStore } from "@/shared/store/category";
+import React from 'react';
+import { useIntersection } from 'react-use';
+import { Title } from './title';
+import { cn } from '@/shared/lib/utils';
+import { ProductCard } from './product-card';
+import { useCategoryStore } from '@/shared/store/category';
 
 interface Props {
   title: string;
@@ -15,13 +15,7 @@ interface Props {
   categoryId: number;
 }
 
-export const ProductGroupList: React.FC<Props> = ({
-  title,
-  categoryId,
-  items,
-  className,
-  listClassName,
-}) => {
+export const ProductGroupList: React.FC<Props> = ({ title, categoryId, items, className, listClassName }) => {
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
   const intersectionRef = React.useRef(null);
   const intersection = useIntersection(intersectionRef, {
@@ -46,7 +40,7 @@ export const ProductGroupList: React.FC<Props> = ({
         className="font-extrabold mb-5"
       />
 
-      <div className={cn("grid grid-cols-3 gap-[50px]", listClassName)}>
+      <div className={cn('grid grid-cols-3 gap-[50px]', listClassName)}>
         {items.map((product) => (
           <ProductCard
             key={product.id}

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import { cn } from "@/shared/lib/utils";
-import { DialogContent, Dialog } from "@/shared/components/ui/dialog";
-import { ChooseProductForm } from "@/shared/components/shared";
-import { ProductWithRelations } from "@/@types/prisma";
-import { ChoosePizzaForm } from "../choose-pizza-form";
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import { cn } from '@/shared/lib/utils';
+import { DialogContent, Dialog } from '@/shared/components/ui/dialog';
+import { ChooseProductForm } from '@/shared/components/shared';
+import { ProductWithRelations } from '@/@types/prisma';
+import { ChoosePizzaForm } from '../choose-pizza-form';
 
 interface Props {
   product: ProductWithRelations;
@@ -22,22 +22,19 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
       open={Boolean(product)}
       onOpenChange={() => router.back()}
     >
-      <DialogContent
-        className={cn(
-          "p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden",
-          className
-        )}
-      >
+      <DialogContent className={cn('p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden', className)}>
         {isPizzaForm ? (
           <ChoosePizzaForm
             imageUrl={product.imageUrl}
             name={product.name}
             ingredients={product.ingredients}
+            items={product.items}
           />
         ) : (
           <ChooseProductForm
             imageUrl={product.imageUrl}
             name={product.name}
+            items={product.items}
           />
         )}
       </DialogContent>

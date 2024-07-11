@@ -1,26 +1,25 @@
-import React from "react";
-import { cn } from "@/shared/lib/utils";
-import { Title } from "./title";
-import { Button } from "../ui";
+import React from 'react';
+import { cn } from '@/shared/lib/utils';
+import { Title } from './title';
+import { Button } from '../ui';
+import { ProductItem } from '@prisma/client';
 
 interface Props {
   className?: string;
   imageUrl: string;
   name: string;
-  onClickAdd?: VoidFunction;
+  onClickAddCart?: VoidFunction;
+  items: ProductItem[];
 }
 
-export const ChooseProductForm: React.FC<Props> = ({
-  className,
-  imageUrl,
-  name,
-  onClickAdd,
-}) => {
-  const textDetails = "30 см, традиционное тесто 30";
-  const totalPrice = "350 ₽";
+export const ChooseProductForm: React.FC<Props> = ({ className, imageUrl, name, onClickAddCart, items }) => {
+  const textDetails = '30 см, традиционное тесто 30';
+  const totalPrice = '350 ₽';
+
+  console.log(items);
 
   return (
-    <div className={cn(className, "flex flex-1")}>
+    <div className={cn(className, 'flex flex-1')}>
       <div className="flex items-center justify-center flex-1 relative w-full">
         <img
           src={imageUrl}
