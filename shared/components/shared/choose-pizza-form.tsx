@@ -12,6 +12,7 @@ import {
 } from "@/shared/constants/pizza";
 import { Ingredient } from "@prisma/client";
 import { IngredientItem } from "./ingredient";
+import { useSet } from "react-use";
 
 interface Props {
   className?: string;
@@ -30,6 +31,10 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 }) => {
   const [size, setSize] = React.useState<PizzaSize>(20);
   const [type, setType] = React.useState<PizzaType>(1);
+
+  const [selectedIngredients, { toggle: addIngredient }] = useSet(
+    new Set<number>([])
+  );
 
   const textDetails = "30 см, традиционное тесто 30";
   const totalPrice = "350 ₽";
@@ -71,6 +76,8 @@ export const ChoosePizzaForm: React.FC<Props> = ({
                 imageUrl={ingredient.imageUrl}
                 name={ingredient.name}
                 price={ingredient.price}
+                active={selectedIngredients.has(ingredient.id)}
+                onClick={() => addIngredient(ingredient.id)}
               />
             ))}
           </div>
