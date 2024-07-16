@@ -1,5 +1,6 @@
 import { Ingredient } from '@prisma/client';
 import { mapPizzaType, PizzaSize, PizzaType } from '../constants/pizza';
+import { CartStateItem } from './get-cart-details';
 
 /**
  * Вычисляет подробности товаров в корзине на основе типа пиццы, размера и ингредиентов.
@@ -9,7 +10,11 @@ import { mapPizzaType, PizzaSize, PizzaType } from '../constants/pizza';
  * @param {Ingredient[]} ingredients - Список ингредиентов
  * @return {string} Подробности товаров в корзине в виде строки
  */
-export const getCartItemsDetails = (pizzaType: PizzaType, pizzaSize: PizzaSize, ingredients: Ingredient[]): string => {
+export const getCartItemsDetails = (
+  ingredients: CartStateItem['ingredients'],
+  pizzaType: PizzaType,
+  pizzaSize: PizzaSize
+): string => {
   const details = [];
 
   if (pizzaSize && pizzaType) {
