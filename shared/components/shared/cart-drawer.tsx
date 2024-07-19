@@ -14,11 +14,30 @@ interface Props {
 }
 
 export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children, className }) => {
-  const [totalAmount, fetchCartItems, items] = useCartStore((state) => [state.totalAmount, state.fetchCartItems, state.items]);
+  const [totalAmount, fetchCartItems, items, updateItemQuantity, removeCartItem] = useCartStore((state) => [
+    state.totalAmount,
+    state.fetchCartItems,
+    state.items,
+    state.updateItemQuantity,
+    state.removeCartItem,
+  ]);
 
   React.useEffect(() => {
     fetchCartItems();
   }, []);
+
+  /**
+   * Обновляет количество элемента в корзине в зависимости от указанного типа.
+   *
+   * @param {number} id - ID элемента.
+   * @param {number} quantity - Текущее количество элемента.
+   * @param {'plus' | 'minus'} type - Тип операции обновления ('plus' для увеличения, 'minus' для уменьшения).
+   * @return {void}
+   */
+  const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+    const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
+    updateItemQuantity(id, newQuantity);
+  };
 
   return (
     <div className={className}>
@@ -27,7 +46,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
         <SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
           <SheetHeader>
             <SheetTitle>
-              В корзине <span className="font-bold">3 товара</span>
+              В корзине <span className="font-bold">{items.length} товара</span>
             </SheetTitle>
           </SheetHeader>
           <div className="-mx-6 mt-5 overflow-auto flex-1">
@@ -45,6 +64,8 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
                   name={item.name}
                   price={item.price}
                   quantity={item.quantity}
+                  onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
+                  onClickRemove={() => removeCartItem(item.id)}
                 />
               ))}
             </div>
