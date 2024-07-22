@@ -13,6 +13,7 @@ interface ReturnProps {
   selectedIngredients: Set<number>;
   addIngredient: (id: number) => void;
   availableSizes: Variant[];
+  currentItemId?: number;
 }
 
 /**
@@ -27,6 +28,8 @@ export const usePizzaOptions = (items: ProductItem[]): ReturnProps => {
   const [size, setSize] = React.useState<PizzaSize>(20);
   const [type, setType] = React.useState<PizzaType>(1);
 
+  const currentItemId = items.find((item) => item.pizzaType === type && item.size === size)?.id;
+
   const availableSizes = getAvailablePizzaSizes(type, items);
 
   React.useEffect(() => {
@@ -38,5 +41,5 @@ export const usePizzaOptions = (items: ProductItem[]): ReturnProps => {
     }
   }, [type]);
 
-  return { size, type, setSize, setType, selectedIngredients, addIngredient, availableSizes };
+  return { size, type, setSize, setType, selectedIngredients, addIngredient, availableSizes, currentItemId };
 };

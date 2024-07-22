@@ -50,21 +50,27 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
             </SheetTitle>
           </SheetHeader>
           <div className="-mx-6 mt-5 overflow-auto flex-1">
-            <div className="mb-2">
-              {items.map((item) => (
+            {items.map((item) => (
+              <div
+                key={item.id}
+                className="mb-2"
+              >
                 <CartDrawerItem
-                  key={item.id}
                   id={item.id}
                   imageUrl={item.imageUrl}
-                  details={getCartItemsDetails(item.ingredients, item.pizzaType as PizzaType, item.pizzaSize as PizzaSize)}
+                  details={
+                    item.pizzaSize && item.pizzaType
+                      ? getCartItemsDetails(item.ingredients, item.pizzaType as PizzaType, item.pizzaSize as PizzaSize)
+                      : ''
+                  }
                   name={item.name}
                   price={item.price}
                   quantity={item.quantity}
                   onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
                   onClickRemove={() => removeCartItem(item.id)}
                 />
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
           <SheetFooter className="-mx-6 bg-white p-8">
             <div className="w-full">
