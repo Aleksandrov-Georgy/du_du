@@ -1,12 +1,12 @@
-import React from "react";
-import { Filters } from "./use-filters";
-import qs from "qs";
-import { useRouter } from "next/navigation";
+import { Filters } from './use-filters';
+import qs from 'qs';
+import { useRouter } from 'next/navigation';
+import { useDeepCompareEffect } from 'react-use';
 
 export const useQueryFilters = (filters: Filters) => {
   const router = useRouter();
 
-  React.useEffect(() => {
+  useDeepCompareEffect(() => {
     const params = {
       ...filters.prices,
       pizzaTypes: Array.from(filters.pizzaTypes),
@@ -15,9 +15,9 @@ export const useQueryFilters = (filters: Filters) => {
     };
 
     const query = qs.stringify(params, {
-      arrayFormat: "comma",
+      arrayFormat: 'comma',
     });
 
     router.push(`?${query}`, { scroll: false });
-  }, [filters, router]);
+  }, [filters]);
 };
