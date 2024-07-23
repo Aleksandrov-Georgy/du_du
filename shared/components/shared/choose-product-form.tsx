@@ -11,9 +11,10 @@ interface Props {
   onSubmit?: VoidFunction;
   items: ProductItem[];
   price: number;
+  loading?: boolean;
 }
 
-export const ChooseProductForm: React.FC<Props> = ({ className, imageUrl, name, onSubmit, price }) => {
+export const ChooseProductForm: React.FC<Props> = ({ className, imageUrl, name, onSubmit, price, loading }) => {
   return (
     <div className={cn(className, 'flex flex-1')}>
       <div className="flex items-center justify-center flex-1 relative w-full">
@@ -32,7 +33,8 @@ export const ChooseProductForm: React.FC<Props> = ({ className, imageUrl, name, 
         />
 
         <Button
-          onClick={onSubmit}
+          loading={loading}
+          onClick={() => onSubmit?.()}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
         >
           Добавить в корзину за {price} ₽
