@@ -1,4 +1,4 @@
-import { CheckoutItemDetails, Container, Title, WhiteBlock } from '@/shared/components/shared';
+import { CheckoutItem, CheckoutItemDetails, Container, Title, WhiteBlock } from '@/shared/components/shared';
 import { Button, Input, Textarea } from '@/shared/components/ui';
 import { ArrowRight, Package, Percent, Truck } from 'lucide-react';
 
@@ -12,7 +12,35 @@ export default function CheckoutPage() {
 
       <div className="flex gap-10">
         <div className="flex flex-col gap-10 flex-1 mb-20">
-          <WhiteBlock title="1. Корзина">123</WhiteBlock>
+          <WhiteBlock title="1. Корзина">
+            <div className="flex flex-col gap-5">
+              <CheckoutItem
+                id={1}
+                imageUrl={'https://media.dodostatic.net/image/r:292x292/11EE7D61706D472F9A5D71EB94149304.avif'}
+                details="Додо Капучино"
+                name="Чоризо фрэш"
+                price={216}
+                quantity={3}
+              />
+              <CheckoutItem
+                id={1}
+                imageUrl={'https://media.dodostatic.net/image/r:292x292/11EE7D61706D472F9A5D71EB94149304.avif'}
+                details="Додо Капучино"
+                name="Чоризо фрэш"
+                price={216}
+                quantity={3}
+              />
+              <CheckoutItem
+                id={1}
+                imageUrl={'https://media.dodostatic.net/image/r:292x292/11EE7D61706D472F9A5D71EB94149304.avif'}
+                details="Додо Капучино"
+                name="Чоризо фрэш"
+                price={216}
+                quantity={3}
+              />
+            </div>
+          </WhiteBlock>
+
           <WhiteBlock title="2. Персональные данные">
             <div className="grid grid-cols-2 gap-5">
               <Input
