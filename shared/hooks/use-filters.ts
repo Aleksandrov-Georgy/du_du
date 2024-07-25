@@ -1,6 +1,6 @@
-import { useSearchParams } from "next/navigation";
-import { useSet } from "react-use";
-import React from "react";
+import { useSet } from 'react-use';
+import React from 'react';
+import { useSearchParams } from 'next/navigation';
 
 interface PriceProps {
   priceFrom?: number;
@@ -31,20 +31,20 @@ export const useFilters = (): ReturnProps => {
   const searchParams = useSearchParams() as unknown as Map<keyof QueryFilters, string>;
 
   const [selectedIngredients, { toggle: toggleIngredients }] = useSet(
-    new Set<string>(searchParams.get("ingredients")?.split(","))
+    new Set<string>(searchParams.get('ingredients')?.split(','))
   );
 
   const [sizes, { toggle: toggleSizes }] = useSet(
-    new Set<string>(searchParams.has("sizes") ? searchParams.get("sizes")?.split(",") : [])
+    new Set<string>(searchParams.has('sizes') ? searchParams.get('sizes')?.split(',') : [])
   );
 
   const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(
-    new Set<string>(searchParams.has("pizzaTypes") ? searchParams.get("pizzaTypes")?.split(",") : [])
+    new Set<string>(searchParams.has('pizzaTypes') ? searchParams.get('pizzaTypes')?.split(',') : [])
   );
 
   const [prices, setPrices] = React.useState<PriceProps>({
-    priceFrom: Number(searchParams.get("priceFrom")) || undefined,
-    priceTo: Number(searchParams.get("priceTo")) || undefined,
+    priceFrom: Number(searchParams.get('priceFrom')) || undefined,
+    priceTo: Number(searchParams.get('priceTo')) || undefined,
   });
 
   const updatePrice = (name: keyof PriceProps, value: number) => {
@@ -60,7 +60,6 @@ export const useFilters = (): ReturnProps => {
       pizzaTypes,
       selectedIngredients,
       prices,
-
       setPrices: updatePrice,
       setPizzaTypes: togglePizzaTypes,
       setSizes: toggleSizes,
