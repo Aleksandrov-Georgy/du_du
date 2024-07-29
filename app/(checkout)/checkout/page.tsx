@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useCart } from '@/shared/hooks';
 import { CheckoutCart } from '@/shared/components/shared/checkout/checkout-cart';
 import { CheckoutAddressForm, CheckoutPersonalForm } from '@/shared/components/shared/checkout';
-import { checkoutFormSchema, CheckoutFormValues } from '@/shared/components/shared/checkout/checkout-form-schema';
+import { checkoutFormSchema, CheckoutFormValues } from '@/shared/constants/checkout-form-schema';
 
 export default function CheckoutPage() {
   const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
