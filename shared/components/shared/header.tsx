@@ -3,7 +3,7 @@
 import { cn } from '@/shared/lib/utils';
 import React from 'react';
 import Image from 'next/image';
-import { CartButton, Container, ProfileButton, SearchInput } from '.';
+import { AuthModal, CartButton, Container, ProfileButton, SearchInput } from '.';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
@@ -14,9 +14,9 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart = true }) => {
+  const [openAuthModal, setOpenAuthModal] = React.useState(false);
   const { data: session } = useSession();
 
-  console.log(session, 777);
   return (
     <header className={cn('border-b', className)}>
       {/* Левая часть */}
@@ -44,7 +44,11 @@ export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart =
 
         {/* Правая часть */}
         <div className="flex items-center gap-3">
-          <ProfileButton />
+          <AuthModal
+            open={openAuthModal}
+            onClose={() => setOpenAuthModal(false)}
+          />
+          <ProfileButton onClickSignIn={() => setOpenAuthModal(true)} />
           <div>{hasCart && <CartButton />}</div>
         </div>
       </Container>
