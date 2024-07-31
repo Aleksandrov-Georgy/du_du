@@ -38,7 +38,7 @@ export default function CheckoutPage() {
         icon: '✅',
       });
 
-      if (url) {
+      if (url!) {
         location.href = url;
       }
     } catch (err) {

@@ -22,6 +22,7 @@ export { CheckoutItemSkeleton } from './checkout-item-skeleton';
 export { CheckoutSidebar } from './checkout-sidebar';
 export { ClearButton } from './clear-button';
 export { ErrorText } from './error-text';
+export { ProfileButton } from './profile-button';
 export * from './email-templains';
 export * from './modals';
 export * from './form-components';

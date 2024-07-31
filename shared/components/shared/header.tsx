@@ -1,12 +1,11 @@
+'use client';
+
 import { cn } from '@/shared/lib/utils';
-
 import React from 'react';
-
 import Image from 'next/image';
-import { Button } from '../ui';
-import { CartButton, Container, SearchInput } from '.';
-import { User } from 'lucide-react';
+import { CartButton, Container, ProfileButton, SearchInput } from '.';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 interface Props {
   className?: string;
@@ -15,6 +14,9 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart = true }) => {
+  const { data: session } = useSession();
+
+  console.log(session, 777);
   return (
     <header className={cn('border-b', className)}>
       {/* Левая часть */}
@@ -42,13 +44,7 @@ export const Header: React.FC<Props> = ({ className, hasSearch = true, hasCart =
 
         {/* Правая часть */}
         <div className="flex items-center gap-3">
-          <Button
-            variant="outline"
-            className="flex items-center gap-1"
-          >
-            <User size={16} />
-            Войти
-          </Button>
+          <ProfileButton />
           <div>{hasCart && <CartButton />}</div>
         </div>
       </Container>
