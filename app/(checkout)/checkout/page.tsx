@@ -10,11 +10,29 @@ import { checkoutFormSchema, CheckoutFormValues } from '@/shared/constants/check
 import { cn } from '@/shared/lib/utils';
 import { createOrder } from '@/app/api/actions';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { API } from '@/shared/services/api-client';
 
 export default function CheckoutPage() {
   const { totalAmount, updateItemQuantity, items, removeCartItem, loading } = useCart();
   const [submitting, setSubmitting] = useState(false);
+  const { data: session } = useSession();
+
+  React.useEffect(() => {
+    async function fetchUserInfo() {
+      const data = await API.auth.getMe();
+      const [firstName, lastName] = data.fullName.split(' ');
+
+      form.setValue('firstName', firstName);
+      form.setValue('lastName', lastName);
+      form.setValue('email', data.email);
+    }
+
+    if (session) {
+      fetchUserInfo();
+    }
+  }, [session]);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),

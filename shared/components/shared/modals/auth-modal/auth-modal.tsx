@@ -3,6 +3,7 @@ import { signIn } from 'next-auth/react';
 
 import React from 'react';
 import { LoginForm } from './forms/login-form';
+import { RegisterForm } from './forms/register-form';
 
 interface Props {
   open: boolean;
@@ -23,7 +24,7 @@ export const AuthModal: React.FC<Props> = ({ onClose, open }) => {
       onOpenChange={handleClose}
     >
       <DialogContent className="w-[450px] bg-white p-10">
-        {type === 'login' ? <LoginForm onClose={onClose} /> : <h1>регистрация</h1>}
+        {type === 'login' ? <LoginForm onClose={onClose} /> : <RegisterForm onClose={onClose} />}
         <hr />
         <div className="flex gap-2">
           <Button
@@ -40,7 +41,7 @@ export const AuthModal: React.FC<Props> = ({ onClose, open }) => {
             GitHub
           </Button>
 
-          <Button
+          {/* <Button
             variant="secondary"
             onClick={() => signIn('google', { callbackUrl: '/', redirect: true })}
             type="button"
@@ -52,7 +53,7 @@ export const AuthModal: React.FC<Props> = ({ onClose, open }) => {
               className="w-6 h-6"
             />
             GOOGLE
-          </Button>
+          </Button> */}
         </div>
         <Button
           variant="outline"
